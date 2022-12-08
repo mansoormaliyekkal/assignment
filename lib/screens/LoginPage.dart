@@ -21,20 +21,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  FirebaseMessaging firebaseMessaging = FirebaseMessaging();
+  final firebaseMessaging = FirebaseMessaging.instance;
   String _firebaseToken;
 
   @override
   void initState() {
     super.initState();
 
-    firebaseMessaging.configure(onLaunch: (Map<String, dynamic> msg) {
-      print("onLaunch called");
-    }, onMessage: (Map<String, dynamic> msg) {
-      print("onMessage called");
-    }, onResume: (Map<String, dynamic> msg) {
-      print("onResume called");
-    });
+    // firebaseMessaging.configure(onLaunch: (Map<String, dynamic> msg) {
+    //   print("onLaunch called");
+    // }, onMessage: (Map<String, dynamic> msg) {
+    //   print("onMessage called");
+    // }, onResume: (Map<String, dynamic> msg) {
+    //   print("onResume called");
+    // });
 
     firebaseMessaging.getToken().then((token) {
       fireBaseToken(token);
@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _isLoading = false;
   bool obscureText = true;
 
-  FirebaseMessaging fireBaseMessaging = FirebaseMessaging();
+  final fireBaseMessaging = FirebaseMessaging.instance;
   String _fireBaseToken;
 
   bool internetConn = true;
@@ -121,13 +121,13 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     checkConnection();
 
-    fireBaseMessaging.configure(onLaunch: (Map<String, dynamic> msg) {
-      print("onLaunch called $msg");
-    }, onMessage: (Map<String, dynamic> msg) {
-      print("onMessage called  $msg");
-    }, onResume: (Map<String, dynamic> msg) {
-      print("onResume called $msg");
-    });
+    // fireBaseMessaging.configure(onLaunch: (Map<String, dynamic> msg) {
+    //   print("onLaunch called $msg");
+    // }, onMessage: (Map<String, dynamic> msg) {
+    //   print("onMessage called  $msg");
+    // }, onResume: (Map<String, dynamic> msg) {
+    //   print("onResume called $msg");
+    // });
 
     fireBaseMessaging.getToken().then((token) {
       fireBaseToken(token);
@@ -168,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
           print(jsonData);
           if (jsonData.responseStatus == 1) {
             var msgdata =
-            MessageResponseModel.fromJson(json.decode(response.body));
+                MessageResponseModel.fromJson(json.decode(response.body));
             var loginToken = jsonData.messageResponseModel.token;
             print("Decoded json data is ${msgdata.token}");
             print("Status code is ${jsonData.responseStatus}");
@@ -196,8 +196,7 @@ class _LoginPageState extends State<LoginPage> {
           } else if (jsonData.responseStatus == 0) {
             // If that call was not successful, throw an error.
             showCommonToast("Invalid User.");
-          }
-          else{
+          } else {
             throw Exception('Error occured');
           }
           setState(() {

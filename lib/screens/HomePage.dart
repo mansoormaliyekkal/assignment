@@ -720,9 +720,9 @@ class _HomePageState extends State<HomePage> {
 
   Future getGeoLocation(int checkFlag, BuildContext context) async {
     var _location = new Location();
-    bool permissionStatus = await _location.hasPermission();
+    final permissionStatus = await _location.hasPermission();
     bool servicesStatus = await _location.serviceEnabled();
-    if (permissionStatus) {
+    if (permissionStatus == PermissionStatus.GRANTED) {
       if (servicesStatus) {
         return requestLocation(_location, checkFlag);
       } else {
@@ -732,8 +732,8 @@ class _HomePageState extends State<HomePage> {
         }
       }
     } else {
-      bool _permission = await _location.requestPermission();
-      if (_permission) {
+      final _permission = await _location.requestPermission();
+      if (_permission == PermissionStatus.GRANTED) {
         if (servicesStatus) {
           return requestLocation(_location, checkFlag);
         } else {

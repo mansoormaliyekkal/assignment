@@ -31,8 +31,8 @@ dependencies:
   encrypt: ^0.2.0+2
   autocomplete_textfield: ^1.6.4
   #firebase_core: ^0.4.0+8
-  firebase_messaging: ^5.1.2
-  dio: ^2.0.7
+  firebase_messaging: ^11.2.7
+  dio: ^3.0.9
   path_provider:
   connectivity:
   url_launcher: any

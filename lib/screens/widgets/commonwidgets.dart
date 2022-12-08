@@ -48,7 +48,7 @@ void showCommonToast(String errorMessage) {
       msg: errorMessage,
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
-      timeInSecForIos: 1,
+      timeInSecForIosWeb: 1,
       backgroundColor: Colors.black45,
       textColor: Colors.white,
       fontSize: 16.0);

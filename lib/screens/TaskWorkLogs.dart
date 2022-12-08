@@ -119,7 +119,7 @@ class _WorkLogsState extends State<TaskWorkLogs> {
                                     Text("Date: "),
                                     Text(
                                       workLogList[index].createdDate,
-                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -186,7 +186,7 @@ class _WorkLogsState extends State<TaskWorkLogs> {
                     children: <Widget>[
                       TextField(
                         inputFormatters: [
-                          WhitelistingTextInputFormatter.digitsOnly,
+                          FilteringTextInputFormatter.digitsOnly,
                           LengthLimitingTextInputFormatter(2)
                         ],
                         textAlign: TextAlign.center,
@@ -219,7 +219,7 @@ class _WorkLogsState extends State<TaskWorkLogs> {
 //                              > 59 ? 'Invalid minutes'
 //                              : null,
                           inputFormatters: [
-                            WhitelistingTextInputFormatter.digitsOnly,
+                            FilteringTextInputFormatter.digitsOnly,
                             LengthLimitingTextInputFormatter(2)
                           ],
                           textAlign: TextAlign.center,

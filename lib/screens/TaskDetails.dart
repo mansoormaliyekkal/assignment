@@ -487,7 +487,11 @@ class _TaskDetailsState extends State<TaskDetails> {
 
   Future<void> getFilePath() async {
     try {
-      filePath = await FilePicker.getFilePath(type: FileType.ANY);
+      final file = await FilePicker.platform.pickFiles(
+        type: FileType.any,
+        allowMultiple: false,
+      );
+      filePath = file.files.first.path;
       if (filePath == '') {
         return;
       }
@@ -524,11 +528,11 @@ class _TaskDetailsState extends State<TaskDetails> {
     Response response;
     if (_fileName1 != null) {
       try {
-        FormData formData = new FormData.from({
+        FormData formData = new FormData.fromMap({
           "user_id": userId,
           "security_key": tokenId,
           "task_id": widget.taskId,
-          "document": UploadFileInfo(File(_fileName1), _fileName),
+          "document": MultipartFile.fromFile(_fileName1, filename: _fileName),
         });
         response = await dio.post(
           "http://adevole.com/clients/attendance_app/mobile/upload_document.php",

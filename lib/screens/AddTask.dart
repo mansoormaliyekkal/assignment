@@ -74,8 +74,8 @@ class _AddTaskState extends State<AddTask> {
   initPlatformState() async {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      Map temp = await FilePicker.getMultiFilePath();
-      _filePath = temp.values;
+      final temp = await FilePicker.platform.pickFiles();
+      _filePath = temp.paths;
     } on PlatformException {}
 
     if (!mounted) return;
