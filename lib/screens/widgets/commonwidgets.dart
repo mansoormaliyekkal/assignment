@@ -10,10 +10,10 @@ Future<bool> willPop(BuildContext context) {
       builder: (context) => AlertDialog(
             title: Text("Do you really want to exit"),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                   onPressed: () => Navigator.pop(context, false),
                   child: Text("No")),
-              FlatButton(
+              TextButton(
                   onPressed: () => Navigator.pop(context, true),
                   child: Text("Yes")),
             ],
@@ -31,15 +31,18 @@ Widget commonText(name) {
 
 //Common Button
 Widget commonButton(String label, VoidCallback onPressed) {
-  return RaisedButton(
-      textColor: Colors.white,
-      color: Colors.indigoAccent,
+  return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        textStyle: TextStyle(color: Colors.white),
+        backgroundColor: Colors.indigoAccent,
+        elevation: 5.0,
+        shape:
+            RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8)),
+      ),
       child: new Text(
         label,
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
-      elevation: 5.0,
-      shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8)),
       onPressed: onPressed);
 }
 

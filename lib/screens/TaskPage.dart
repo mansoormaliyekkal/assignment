@@ -113,7 +113,7 @@ class _TaskPageState extends State<TaskPage> with TickerProviderStateMixin {
     print("Url is $url");
 
     try {
-      final response = await client.put(url);
+      final response = await client.put(Uri.parse(url));
       print("Task Response status: ${response.statusCode}");
       print("Task Response body: ${response.body}");
       if (response.statusCode == 200) {

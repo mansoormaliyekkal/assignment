@@ -343,7 +343,7 @@ class _WorkLogsState extends State<TaskWorkLogs> {
     try {
       String url =
           "http://adevole.com/clients/attendance_app/mobile/add_worklog.php?user_id=$userId&security_key=$tokenId&task_id= $taskId&noh=$hrValue:$minValue";
-      final response = await client.put(url);
+      final response = await client.put(Uri.parse(url));
       print("Task Response body: ${response.body}");
       if (response.statusCode == 200) {
         var jsonData = AddCommentModel.fromJson(json.decode(response.body));
@@ -381,7 +381,7 @@ class _WorkLogsState extends State<TaskWorkLogs> {
       String url =
           "http://adevole.com/clients/attendance_app/mobile/list_worklog.php?"
           "user_id=$userId&security_key=$tokenId&task_id=$taskId";
-      final response = await client.put(url);
+      final response = await client.put(Uri.parse(url));
       print("Task Response body: ${response.body}");
       if (response.statusCode == 200) {
         var jsonData = WorkLogsModel.fromJson(json.decode(response.body));

@@ -277,7 +277,7 @@ class _HomePageState extends State<HomePage> {
     String url =
         "http://adevole.com/clients/attendance_app/mobile/checkin_out.php?user_id=$userId&security_key=$tokenId&lat=$_latitude&long=$_longitude&address=$address&flag=$flag";
     print("Url is $url");
-    final response = await http.put(url);
+    final response = await http.put(Uri.parse(url));
     if (response.statusCode == 200) {
       try {
         var jsonData = CheckInOutModel.fromJson(json.decode(response.body));
@@ -331,7 +331,7 @@ class _HomePageState extends State<HomePage> {
         "http://adevole.com/clients/attendance_app/mobile/checkin_out.php?user_id=$userId&security_key=$tokenId&lat=$_latitude&long=$_longitude&address=$address&flag=2";
     print("Url is $url");
 //    if(sharedPreferences.get("status")!= 10){
-    final response = await http.put(url);
+    final response = await http.put(Uri.parse(url));
     print("Task Response status: ${response.statusCode}");
     print("Task Response body: ${response.body}");
     if (response.statusCode == 200) {
@@ -557,7 +557,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget checkOutButton() {
-    return RaisedButton(
+    return ElevatedButton(
       child: Text('Check Out'),
       onPressed: () async {
         await getGeoLocation(2, context);
@@ -566,7 +566,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget checkInButton() {
-    return RaisedButton(
+    return ElevatedButton(
       child: Text('Check In'),
       onPressed: () async {
         await getGeoLocation(1, context);
@@ -575,7 +575,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Widget roundButton(String label, VoidCallback onPressed) {
-  //   return RaisedButton(
+  //   return ElevatedButton(
   //     onPressed: onPressed,
   //     child: Column(
   //       children: <Widget>[
@@ -610,10 +610,10 @@ class _HomePageState extends State<HomePage> {
         builder: (context) => AlertDialog(
               title: Text("Do you really want to exit"),
               actions: <Widget>[
-                FlatButton(
+                TextButton(
                     onPressed: () => Navigator.pop(context, false),
                     child: Text("No")),
-                FlatButton(onPressed: () => exit(0), child: Text("Yes")),
+                TextButton(onPressed: () => exit(0), child: Text("Yes")),
               ],
             ));
   }
@@ -722,7 +722,7 @@ class _HomePageState extends State<HomePage> {
     var _location = new Location();
     final permissionStatus = await _location.hasPermission();
     bool servicesStatus = await _location.serviceEnabled();
-    if (permissionStatus == PermissionStatus.GRANTED) {
+    if (permissionStatus == PermissionStatus.granted) {
       if (servicesStatus) {
         return requestLocation(_location, checkFlag);
       } else {
@@ -733,7 +733,7 @@ class _HomePageState extends State<HomePage> {
       }
     } else {
       final _permission = await _location.requestPermission();
-      if (_permission == PermissionStatus.GRANTED) {
+      if (_permission == PermissionStatus.granted) {
         if (servicesStatus) {
           return requestLocation(_location, checkFlag);
         } else {
@@ -755,11 +755,11 @@ class _HomePageState extends State<HomePage> {
       _longitude = position.longitude;
       String response;
       try {
-        List<Placemark> placeMarkAdd =
-            await Geolocator().placemarkFromCoordinates(_latitude, _longitude);
-        Placemark placemark = placeMarkAdd[0];
-        address =
-            "${placemark.name}, ${placemark.subThoroughfare}, ${placemark.thoroughfare}, ${placemark.subLocality}, ${placemark.locality}, ${placemark.postalCode}, ${placemark.country}";
+        // List<Placemark> placeMarkAdd =
+        //     await Geolocator().placemarkFromCoordinates(_latitude, _longitude);
+        // Placemark placemark = placeMarkAdd[0];
+        // address =
+        //     "${placemark.name}, ${placemark.subThoroughfare}, ${placemark.thoroughfare}, ${placemark.subLocality}, ${placemark.locality}, ${placemark.postalCode}, ${placemark.country}";
         // final String address = await platform.invokeMethod(
         //     'getAddressFromCordinates', {"lat": _latitude, "long": _longitude});
         response = address;
@@ -789,7 +789,7 @@ class _HomePageState extends State<HomePage> {
         "https://adevole.com/clients/attendance_app/mobile/get_check_status.php?user_id=$userId&security_key=$tokenId";
     print("Url is $url");
 //    if(sharedPreferences.get("status")!= 10){
-    final response = await http.put(url);
+    final response = await http.put(Uri.parse(url));
     if (response.statusCode == 200) {
       print(response.body);
       var jsonData = CheckStatusModel.fromJson(json.decode(response.body));

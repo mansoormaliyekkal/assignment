@@ -32,7 +32,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         "https://www.adevole.com/clients/attendance_app/mobile/forgot_password.php?email=${_forgotPassword.text}";
     print("URL is $url");
     print("Url is $url");
-    final response = await client.put(url);
+    final response = await client.put(Uri.parse(url));
     print("Task Response status: ${response.statusCode}");
     print("Task Response body: ${response.body}");
     if (response.statusCode == 200) {

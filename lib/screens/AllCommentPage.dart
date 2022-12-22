@@ -46,7 +46,7 @@ class _AllCommentState extends State<AllComment> {
                               Text("Date: "),
                               Text(
                                 widget.comments[index].createdDate,
-                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -122,7 +122,7 @@ class _AllCommentState extends State<AllComment> {
     try {
       String url =
           "http://adevole.com/clients/attendance_app/mobile/addcomments.php?user_id=$userId&security_key=$tokenId&task_id=$taskId&comment=$newComment";
-      final response = await client.put(url);
+      final response = await client.put(Uri.parse(url));
       print("Task Response body: ${response.body}");
       if (response.statusCode == 200) {
         var jsonData = AddCommentModel.fromJson(json.decode(response.body));

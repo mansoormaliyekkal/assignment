@@ -154,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
     setState(() {
       _isLoading = true;
     });
-    client.post(url, body: {
+    client.post(Uri.parse(url), body: {
       "email_id": _userNameController.text,
       "password": _passwordController.text,
       "fcm_id": _fireBaseToken
@@ -326,7 +326,7 @@ class _LoginPageState extends State<LoginPage> {
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               Expanded(child: SizedBox()),
-                              FlatButton(
+                              TextButton(
                                   onPressed: () => Navigator.push(
                                       context, ForgotPassword.route()),
                                   child: Text(

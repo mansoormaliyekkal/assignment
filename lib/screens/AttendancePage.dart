@@ -76,7 +76,7 @@ class AttendancePageState extends State<AttendancePage> {
       });
       String url =
           "http://adevole.com/clients/attendance_app/mobile/attendance_report.php?user_id=$userId&security_key=$tokenId";
-      final response = await client.put(url);
+      final response = await client.put(Uri.parse(url));
       print("Task Response body: ${response.body}");
       if (response.statusCode == 200) {
         var jsonData =
@@ -118,19 +118,19 @@ class AttendancePageState extends State<AttendancePage> {
                               style: TextStyle(color: Colors.black))
                         ]),
                   ),
-                  if((attendanceList[index].outAddress??'').length>0)
-                  RichText(
-                    text: TextSpan(
-                        text: 'Out Address :- ',
-                        style: TextStyle(
-                            color: Theme.of(context).primaryColor,
-                            fontFamily: 'Comfortaa'),
-                        children: [
-                          TextSpan(
-                              text: attendanceList[index].outAddress ?? '',
-                              style: TextStyle(color: Colors.black))
-                        ]),
-                  ),
+                  if ((attendanceList[index].outAddress ?? '').length > 0)
+                    RichText(
+                      text: TextSpan(
+                          text: 'Out Address :- ',
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontFamily: 'Comfortaa'),
+                          children: [
+                            TextSpan(
+                                text: attendanceList[index].outAddress ?? '',
+                                style: TextStyle(color: Colors.black))
+                          ]),
+                    ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4.0),
                     child: RichText(

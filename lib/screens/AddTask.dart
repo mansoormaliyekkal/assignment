@@ -106,7 +106,7 @@ class _AddTaskState extends State<AddTask> {
       });
       String url =
           "http://adevole.com/clients/attendance_app/mobile/project_names.php?user_id=$userId&security_key=$tokenId";
-      final response = await client.put(url);
+      final response = await client.put(Uri.parse(url));
       print("Task Response body: ${response.body}");
       if (response.statusCode == 200) {
         var jsonData = EmployeeListModel.fromJson(json.decode(response.body));
@@ -134,7 +134,7 @@ class _AddTaskState extends State<AddTask> {
       String url =
           "http://adevole.com/clients/attendance_app/mobile/addtask.php?user_id=$userId&security_key=$tokenId&assign_id=$userId&status=$status&flag=$flag&title=$taskName&description=$taskDesc&project_id=$projectid&due_date=$dueDate";
       print(url);
-      final response = await client.put(url);
+      final response = await client.put(Uri.parse(url));
       if (response.statusCode == 200) {
         showCommonToast("Task added successfully");
         Navigator.pushReplacement(context, TaskPage.route());
@@ -155,7 +155,7 @@ class _AddTaskState extends State<AddTask> {
 //    try{
 //      String url =
 //          "http://adevole.com/clients/attendance_app/mobile/employeeNames.php?user_id=$userId&security_key=$tokenId";
-//      final response = await client.put(url);
+//      final response = await client.put(Uri.parse(url));
 //      print("Task Response body: ${response.body}");
 //      if(response.statusCode == 200){
 //
@@ -401,7 +401,7 @@ class _AddTaskState extends State<AddTask> {
                           ),
 //                          Expanded(
 //                            flex: 4,
-//                            child: RaisedButton(
+//                            child: ElevatedButton(
 //                              onPressed: () {
 //                                selectDate(context);
 //                              },
@@ -481,9 +481,11 @@ class _AddTaskState extends State<AddTask> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(8)),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(8)),
+                    ),
                     onPressed: () {
                       if (_mySelection == null ||
                           _taskNameController.toString().trim().length == 0 ||
@@ -506,9 +508,11 @@ class _AddTaskState extends State<AddTask> {
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(8)),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(8)),
+                    ),
                     child: Text(
                       'Back',
                       style: TextStyle(color: Colors.white),
@@ -528,7 +532,7 @@ class _AddTaskState extends State<AddTask> {
 //                    children: <Widget>[
 //                      Padding(
 //                        padding: const EdgeInsets.fromLTRB(10.0, 0.0,10.0,0.0),
-//                        child: RaisedButton.icon(
+//                        child: ElevatedButton.icon(
 //                            onPressed: () => initPlatformState(),
 //                            shape: StadiumBorder(),
 //                            color: Colors.green,

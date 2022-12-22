@@ -145,7 +145,7 @@ class _TaskDetailsState extends State<TaskDetails> {
       actions: <Widget>[
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: RaisedButton(
+          child: ElevatedButton(
             onPressed: (_savedStatus == taskStatus && _fileName1 == null)
                 ? null
                 : () {
@@ -254,10 +254,12 @@ class _TaskDetailsState extends State<TaskDetails> {
                               padding: const EdgeInsets.all(10.0),
                               child: Column(
                                 children: <Widget>[
-                                  RaisedButton.icon(
+                                  ElevatedButton.icon(
                                       onPressed: () async =>
                                           await getFilePath(),
-                                      shape: StadiumBorder(),
+                                      style: ElevatedButton.styleFrom(
+                                        shape: StadiumBorder(),
+                                      ),
                                       icon: Icon(
                                         Icons.add,
                                         color: Colors.white,
@@ -306,7 +308,7 @@ class _TaskDetailsState extends State<TaskDetails> {
                                         )
                                       : SizedBox(
                                           width: 10.0,
-                                        ) /*RaisedButton.icon(
+                                        ) /*ElevatedButton.icon(
                             disabledColor: Colors.grey,
                             onPressed: () => UploadFile(),
                             shape: StadiumBorder(),
@@ -397,8 +399,17 @@ class _TaskDetailsState extends State<TaskDetails> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Flexible(
-                                child: RaisedButton(
-                                  padding: EdgeInsets.only(right: 0),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(right: 0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                        //topRight: Radius.circular(25.0),
+                                        topLeft: Radius.circular(8),
+                                        bottomLeft: Radius.circular(8),
+                                      ),
+                                    ),
+                                  ),
                                   onPressed: () {
                                     Navigator.push(
                                         context,
@@ -423,21 +434,23 @@ class _TaskDetailsState extends State<TaskDetails> {
                                       )
                                     ],
                                   ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                      //topRight: Radius.circular(25.0),
-                                      topLeft: Radius.circular(8),
-                                      bottomLeft: Radius.circular(8),
-                                    ),
-                                  ),
                                 ),
                               ),
                               SizedBox(
                                 width: 1.0,
                               ),
                               Flexible(
-                                child: RaisedButton(
-                                  padding: EdgeInsets.only(left: 0),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: EdgeInsets.only(left: 0),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(8),
+                                        //topLeft: Radius.circular(25.0),
+                                        bottomRight: Radius.circular(8),
+                                      ),
+                                    ),
+                                  ),
                                   onPressed: () {
                                     Navigator.push(
                                         context,
@@ -458,13 +471,6 @@ class _TaskDetailsState extends State<TaskDetails> {
                                         style: TextStyle(color: Colors.white),
                                       ),
                                     ],
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(8),
-                                      //topLeft: Radius.circular(25.0),
-                                      bottomRight: Radius.circular(8),
-                                    ),
                                   ),
                                 ),
                               ),
@@ -572,7 +578,7 @@ class _TaskDetailsState extends State<TaskDetails> {
       String url =
           "http://adevole.com/clients/attendance_app/mobile/taskslist_detail.php?"
           "user_id=$userId&security_key=$tokenId&task_id=$taskId";
-      final response = await client.put(url);
+      final response = await client.put(Uri.parse(url));
       print("Task Response body: ${response.body}");
       print("Task details URL is $url");
       if (response.statusCode == 200) {
@@ -604,7 +610,7 @@ class _TaskDetailsState extends State<TaskDetails> {
         String url =
             "http://adevole.com/clients/attendance_app/mobile/save_task_status.php?"
             "user_id=$userId&security_key=$tokenId&task_id=$taskId&taskstatus=$taskStatus";
-        final response = await client.put(url);
+        final response = await client.put(Uri.parse(url));
         print("Task Response body: ${response.body}");
         if (response.statusCode == 200) {
           showCommonToast("status changed successfully.");
